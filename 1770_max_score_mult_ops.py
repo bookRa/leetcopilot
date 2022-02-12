@@ -1,39 +1,59 @@
 class Solution:
-    # given an int array nums and an int array multipliers, find the maximum score
-    # of a path where the first or last number in nums is multiplied by the first number in multipliers
-    # and then selected number in nums is deleted as well as the first number in multipliers
     def maximumScore(self, nums: List[int], multipliers: List[int]) -> int:
-
         n, m = len(nums), len(multipliers)
+        dp = [[0] * (m+1) for _ in range(m+1)]
 
-        def dp(i, left):
-            if i == m:
-                return 0
-            else:
-                mult = multipliers[i]
-                r_num = nums[(n -1)- (i -left)]
+        for i in range(m-1, -1, -1):
+            mult = multipliers[i]
+            for left in range(i, -1, -1):
+                right = n - 1 - (i - left)
                 l_num = nums[left]
-                return max(l_num*mult + dp(i + 1, left+1), r_num*mult + dp(i + 1, left))
+                r_num = nums[right]
+                dp[i][left] = max(mult*l_num + dp[i+1][left +1],
+                                  mult*r_num + dp[i+1][left])
         
-        return dp(0,0)
-
-
-        def dp(sub_num, sub_mult):
-            if len(sub_mult) == 1:
-                return max(sub_num[0] * sub_mult[0], sub_num[-1] * sub_mult[0])
-            else:
-                first = sub_num[0] * sub_mult[0] + dp(sub_num[1:], sub_mult[1:])
-                last  = sub_num[-1] * sub_mult[0] + dp(sub_num[:-1], sub_mult[1:])
-                return max(first, last)
-        
-        return dp(nums, multipliers)
-
+        return dp[0][0]
 
         """
         Input: nums = [1,2,3], multipliers = [3,2,1]
-        3 2 1
-        3 7 10
-        9 13 14
+        mult
+       l [14 0 0] 0
+       f [5 8 0] 0
+       t [1 2 3] 0
+          0 0 0  0
+
+        n, m = 3
+        i = 2
+        left = 2
+        mult = 1
+        right = 3 - 1 - (2 - 2) = 2
+        dp[2][2] = max (1*3 + dp[3][3], 1*3 + dp[3][2]) = 3
+
+        left = 1
+        right = 3 - 1 - (2 - 1) = 1
+        dp[2][1] = max(1*2 + dp[3][2], 1*2 + dp[3][1])
+
+        left = 0
+        right = 0
+        dp[2][0] = max(1*1 + dp[3][1], 1*1 + dp[3][0])
+
+        i = 1
+        mult = 2
+        left = 1
+        right = 2 - ( 1 - 1) = 2
+        dp[1][1] = max ( 2 * 2 + dp[2][2], 2* 3 + dp[2][1])
+                 = max (4 + 3, 6 + 2)
+        
+        left = 0
+        right = 1
+        dp[1][0] = max(2*1+dp[2][1], 2*2+dp[2][0]) = max(4, 5)
+
+        i = 0
+        mult = 3
+        left = 0
+        right = 2
+        dp[0][0] = max(3*1+dp[1][1], 3*3+dp[1][0]) = max(11, 14)
+
 
         Input: nums = [-5,-3,-3,-2,7,1], multipliers = [-10,-5,3,4,6]
         50                                                  -10
