@@ -1,7 +1,6 @@
 # given array of integer nums, return the maximum sum of non-adjacent elements
 def max_nonadjacent_ints(nums):
 
-    
     max_sum_at_index = {}
 
     def calc_max_nonadj_sum(sub, index):
@@ -11,7 +10,7 @@ def max_nonadjacent_ints(nums):
         if index >= len(nums) or len(nums) == 0:
             curr_max = 0
         if len(nums) == 1:
-            curr_max= nums[0]
+            curr_max = nums[0]
         if len(nums) == 2:
             curr_max = max(nums[0], nums[1])
         else:
@@ -22,6 +21,7 @@ def max_nonadjacent_ints(nums):
                     curr_max = temp_max
         max_sum_at_index[index] = curr_max
         return curr_max
+
     if len(nums) == 0:
         return 0
     if len(nums) == 1:
@@ -38,6 +38,3 @@ def max_nonadjacent_ints(nums):
 max_nonadjacent_ints([0])
 # max_nonadjacent_ints([1, 2, 3, 1])
 # max_nonadjacent_ints([2,7,9,3,1])
-
-
-

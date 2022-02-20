@@ -10,5 +10,6 @@ def isUgly(n):
         n = n // 5
     return n == 1
 
+
 # first naive solution didn't work b/c recursion depth
-# second unmodified solution worked    
+# second unmodified solution worked

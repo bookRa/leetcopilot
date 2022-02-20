@@ -13,6 +13,7 @@ read4(buf4) # read4 returns 4. Now buf = ['e','f','g','h'], fp points to 'i'
 read4(buf4) # read4 returns 3. Now buf = ['i','j','k',...], fp points to end of file
 """
 
+
 class Solution:
     def read(self, buf, n):
         """
@@ -21,7 +22,7 @@ class Solution:
         :rtype: The number of actual characters read (int)
         """
         remaining_num_letters = n
-        buf4 = ['']
+        buf4 = [""]
         while remaining_num_letters > 0:
             num_letters_read = read4(buf4)
             if num_letters_read == 0:
@@ -36,7 +37,3 @@ class Solution:
         #   read 4 characters into buffer
         #   if buffer is not empty
         #       copy characters to buf
-        
-
-
-

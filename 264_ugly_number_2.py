@@ -1,4 +1,4 @@
-#given integer n, return the nth ugly number.
+# given integer n, return the nth ugly number.
 def nthUglyNumber(n):
     ugly = [1]
     i2, i3, i5 = 0, 0, 0

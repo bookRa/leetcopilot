@@ -3,6 +3,7 @@ class Node:
         self.data = data
         self.next = None
 
+
 class MyLinkedList:
     def __init__(self) -> None:
         self.head: Node = None
@@ -31,7 +32,7 @@ class MyLinkedList:
         new_node.next = curr.next
         curr.next = new_node
         self.size += 1
-    
+
     # deletes the indexth element of the linked list
     def deleteAtIndex(self, index: int) -> None:
         if index < 0 or index >= self.size:
